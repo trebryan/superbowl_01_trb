@@ -1,0 +1,17 @@
+td {
+    width: 3em;
+    height: 3em;
+    text-align: center;
+}
+#afcteam {
+    color: blue;
+    font-size: 2em;
+    -ms-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+#lefthead {
+    border: none;
+    padding: 1px;
+    vertical-align: middle;
+}

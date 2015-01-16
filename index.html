@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Lower Bank Super Bowl Pool</title>
+
+    <link rel="stylesheet" type="text/css" href="css/superBowl.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <!-- Latest compile AngularJS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+
+    <!-- Cell Controller Code -->
+    <script src="js/cellApp.js"></script>
+    <script src="js/cellController.js"></script>
+
+</head>
+
+<body>
+
+<div ng-app="cellApp" ng-controller="cellController">
+
+    <h1 align="center">Lower Bank Super Bowl Pool</h1>
+
+<div class="container">
+    <div class ="row">
+        <div class="col-sm-4">
+            <h3>How to Play</h3>
+            <p>Name:     <input type="text" ng-model="realname"></p>
+            <p>Nickname: <input type="text" ng-model="nickname"></p>
+            <p>Initials: <input type="text" ng-model="initials"></p>
+            <p>Message: {{myModel.message}}</p>
+            <p>Current Cells:</p>
+            <!-- Test Line to make sure I'm getting file in O.K. -->
+            <p ng-repeat="cell in pickFile">Cell ID: {{cell.CellID}} Initials: {{cell.initials}}</p>
+        </div>
+        <div class="col-sm-8">
+            <h3 align="center">NFC Team</h3>
+
+            <table class="table table-bordered">
+                <tr>
+                    <td id="lefthead" rowspan="11"><div id="afcteam">AFC Team</div></td>
+                </tr>
+
+                <tr ng-repeat = "row in playingField">
+                    <td ng-repeat = "cell in row" ng-click="selected(cell)" ng-init="load(cell)">
+                            <p>{{cell.initials}}</p>
+
+                    </td>
+                </tr>
+
+            </table>
+
+    </div>
+</div>
+    </div>
+
+
+
+</body>
+</html>
