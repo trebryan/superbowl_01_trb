@@ -1,34 +1,38 @@
-{
-    "0": {
-        "CellID": "22",
+[
+    {
+        "CellID": "20",
         "initials": "RJR"
     },
-    "1": {
-        "CellID": "47",
+    {
+        "CellID": "31",
         "initials": "RJR"
     },
-    "2": {
-        "CellID": "01",
+    {
+        "CellID": "30",
         "initials": "RJR"
     },
-    "3": {
+    {
         "CellID": "70",
-        "initials": "MER"
+        "initials": "RJR"
     },
-    "4": {
-        "CellID": "09",
-        "initials": "MER"
+    {
+        "CellID": "26",
+        "initials": "RJR"
     },
-    "5": {
-        "CellID": "51",
-        "initials": "JJR"
+    {
+        "CellID": "74",
+        "initials": "MAK"
     },
-    "7": {
-        "CellID": "55",
-        "initials": "BGR"
+    {
+        "CellID": "87",
+        "initials": "MAK"
     },
-    "8": {
-        "CellID": "40",
-        "initials": "BGR"
+    {
+        "CellID": "58",
+        "initials": "MAK"
+    },
+    {
+        "CellID": "03",
+        "initials": "RJR"
     }
-}
+]

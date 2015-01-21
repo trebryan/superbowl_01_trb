@@ -9,21 +9,37 @@ app.controller("cellController", function($scope, $http) {
     $scope.initials = "RJR";
     $scope.pickFile = [];
 
+    //$http.get('data/picks.json').success(function(data) {
+    //    $scope.pickFile = data;
+    //    console.log($scope.pickFile.length + " is the length of the pickFile after loading");
+    //});
+
+    var promise = $http.get('data/picks.json');
+
+    promise.then( function(payload) {
+        $scope.pickFile = payload.data;
+        console.log($scope.pickFile.length + " is the length of the pickFile after loading");
+    });
+
+
+
+
     $scope.load = function(cell) {
-        $http.get('data/picks.json').success(function(data) {
-            $scope.pickFile = data;
-            //console.log($scope.pickFile.length +"idiot");
-            for (record in $scope.pickFile){
-                currentCell = ""+cell.screenRow+cell.screenColumn;
+        promise.then( function() {
+            console.log($scope.pickFile.length + " is the length of the pickFile while the Field is being created");
+            for (var record in $scope.pickFile) {
+                var currentCell = "" + cell.screenRow + cell.screenColumn;
                 //console.log(currentCell);
-                //console.log($scope.pickFile[record].CellID);
+                console.log($scope.pickFile[record].CellID);
                 if (currentCell === $scope.pickFile[record].CellID) {
                     cell.initials = $scope.pickFile[record].initials;
                     cell.unPicked = false;
                 }
             }
-        });
-    };
+        })
+        };
+
+
 
 
 
@@ -34,17 +50,17 @@ app.controller("cellController", function($scope, $http) {
             this.initials = "";
             this.unPicked = true;
 
-            this.pickedBy = function(initials){
-                console.log("Picked by: "+initials);
-                this.initials = initials;
-            }
+            //this.pickedBy = function(initials){
+            //    console.log("Picked by: "+initials);
+            //    this.initials = initials;
+            //};
+            //
+            //this.unPick = function(){
+            //    this.intials = undefined;
+            //};
 
-            this.unPick = function(){
-                this.intials = undefined;
-            }
 
-
-        }
+        };
 
         $scope.playingField = new Array(10);
 
@@ -62,56 +78,21 @@ app.controller("cellController", function($scope, $http) {
             console.log(cell.unPicked);
             if (cell.unPicked) {
                 console.log(cell);
-                var cellID = cell.screenRow.toString() + cell.screenColumn.toString()
+                var cellID = cell.screenRow.toString() + cell.screenColumn.toString();
                 console.log(cellID);
                 if (cell.initials !== "") {
-                    cell.initials = "";
+                    cell.initials = undefined;
                     $http.post('superbowl_unpick.php', {CellID: cellID, initials: cell.initials});
                 }
                 else {
                     cell.initials = $scope.initials;
                     $http.post('superbowl_pick.php', {CellID: cellID, initials: cell.initials});
                 }
-                ;
                 console.log(cell);
 
                 $scope.myModel.message = "Cell clicked [" + cellID + "]";
             }
         }
-
-
-
-
-        /*
-        $http.get('data/picks.json').success(function (data) {
-            $scope.pickFile = data;
-        }),
-
-        $scope.load = function (x,y,cell) {
-            $scope.cellVal = $scope.rows[x] + "" + $scope.columns[y];
-            $scope.cellContents = $scope.initials;
-            console.log($scope.cellVal);
-            var cellMitch = {};
-            cellMitch[$scope.cellVal] = true;
-            $scope.cellTaken.push(cellMitch);
-            console.log($scope.cellTaken[parseInt($scope.cellVal)]);
-        },
-
-        $scope.pickCell = function (x, y) {
-           // if($scope.pickFile.initials = "") {
-                console.log("Open");
-                $http.post('superbowl_pick.php',{CellID : $scope.cellVal, initials : $scope.initials});
-                console.log($scope.cellVal);
-                $scope.cellContents = $scope.initials;
-                document.getElementById($scope.cellVal).innerHTML=$scope.cellContents;
-           // } else{
-           //     console.log('taken');
-           // };
-
-        }
-
-        //console.log($scope.cellVal);
-        */
 
     });
 
