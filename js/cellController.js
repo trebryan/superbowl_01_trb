@@ -18,7 +18,6 @@ app.controller("cellController", function($scope, $http) {
 
     promise.then( function(payload) {
         $scope.pickFile = payload.data;
-        console.log($scope.pickFile.length + " is the length of the pickFile after loading");
     });
 
 
@@ -26,14 +25,13 @@ app.controller("cellController", function($scope, $http) {
 
     $scope.load = function(cell) {
         promise.then( function() {
-            console.log($scope.pickFile.length + " is the length of the pickFile while the Field is being created");
             for (var record in $scope.pickFile) {
                 var currentCell = "" + cell.screenRow + cell.screenColumn;
                 //console.log(currentCell);
                 console.log($scope.pickFile[record].CellID);
                 if (currentCell === $scope.pickFile[record].CellID) {
                     cell.initials = $scope.pickFile[record].initials;
-                    cell.unPicked = false;
+                    cell.previouslyUnpicked = true;
                 }
             }
         })
@@ -48,10 +46,11 @@ app.controller("cellController", function($scope, $http) {
             this.screenRow = screenRow;
             this.screenColumn = screenColumn;
             this.initials = "";
-            this.unPicked = true;
+            this.previouslyUnpicked = true;
+            this.currentlyUnpicked = true;
 
-            //this.pickedBy = function(initials){
-            //    console.log("Picked by: "+initials);
+            //this.UnpickedBy = function(initials){
+            //    console.log("Unpicked by: "+initials);
             //    this.initials = initials;
             //};
             //
@@ -68,29 +67,29 @@ app.controller("cellController", function($scope, $http) {
             $scope.playingField[row] = new Array(10);
             for (var col=0; col<10; col++){
                 $scope.playingField[row][col] = new PickCell(row, col);
-                //$scope.playingField[row][col].pickedBy(""+row+col);
+                //$scope.playingField[row][col].UnpickedBy(""+row+col);
             }
         }
 
         console.log("Field done");
 
         $scope.selected = function(cell) {
-            console.log(cell.unPicked);
-            if (cell.unPicked) {
-                console.log(cell);
-                var cellID = cell.screenRow.toString() + cell.screenColumn.toString();
+            console.log(cell.previouslyUnpicked);
+            if (cell.previouslyUnpicked) {
+                    var cellID = cell.screenRow.toString() + cell.screenColumn.toString();
                 console.log(cellID);
-                if (cell.initials !== "") {
-                    cell.initials = undefined;
-                    $http.post('superbowl_unpick.php', {CellID: cellID, initials: cell.initials});
-                }
-                else {
+                if (cell.currentlyUnpicked) {
                     cell.initials = $scope.initials;
                     $http.post('superbowl_pick.php', {CellID: cellID, initials: cell.initials});
+                    cell.currentlyUnpicked = false;
                 }
-                console.log(cell);
+                else {
+                    cell.initials = undefined;
+                    $http.post('superbowl_unpick.php', {CellID: cellID, initials: cell.initials});
+                    cell.currentlyUnpicked = true;
+                }
 
-                $scope.myModel.message = "Cell clicked [" + cellID + "]";
+                $scope.myModel.message = "Cell [" + cellID + "] "+cell.currentlyUnpicked;
             }
         }
 

@@ -1,17 +1,14 @@
+body {
+    background-image: url(../images/footbal_field-new.jpg);
+}
+
 td {
     width: 3em;
     height: 3em;
     text-align: center;
+    border: 1px solid black;
 }
-#afcteam {
-    color: blue;
-    font-size: 2em;
-    -ms-transform: rotate(270deg);
-    -webkit-transform: rotate(270deg);
-    transform: rotate(270deg);
-}
-#lefthead {
-    border: none;
-    padding: 1px;
+
+#leftlogoheader{
     vertical-align: middle;
 }
