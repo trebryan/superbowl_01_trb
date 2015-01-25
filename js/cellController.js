@@ -6,8 +6,15 @@
 app.controller("cellController", function($scope, $http) {
 
     $scope.myModel = {message: ""};
+    $scope.realName= "Treb Ryan";
+    $scope.nickName="The Man!";
     $scope.initials = "RJR";
     $scope.pickFile = [];
+    $scope.totalPicks = 0;
+    $scope.paidPicks= 0;
+    $scope.unpaidPicks=0;
+    $scope.pickPrice=10;
+    $scope.payNow=0;
 
     //$http.get('data/picks.json').success(function(data) {
     //    $scope.pickFile = data;
@@ -20,7 +27,10 @@ app.controller("cellController", function($scope, $http) {
         $scope.pickFile = payload.data;
     });
 
-
+    var getCost = function(){
+        $scope.unpaidPicks = $scope.totalPicks - $scope.paidPicks;
+        $scope.payNow = $scope.unpaidPicks * $scope.pickPrice;
+    }
 
 
     $scope.load = function(cell) {
@@ -31,9 +41,11 @@ app.controller("cellController", function($scope, $http) {
                 console.log($scope.pickFile[record].CellID);
                 if (currentCell === $scope.pickFile[record].CellID) {
                     cell.initials = $scope.pickFile[record].initials;
+                    $scope.totalPicks++;
                     cell.previouslyUnpicked = true;
                 }
             }
+            getCost();
         })
         };
 
@@ -81,11 +93,15 @@ app.controller("cellController", function($scope, $http) {
                 if (cell.currentlyUnpicked) {
                     cell.initials = $scope.initials;
                     $http.post('superbowl_pick.php', {CellID: cellID, initials: cell.initials});
+                    $scope.totalPicks++;
+                    getCost();
                     cell.currentlyUnpicked = false;
                 }
                 else {
                     cell.initials = undefined;
                     $http.post('superbowl_unpick.php', {CellID: cellID, initials: cell.initials});
+                    $scope.totalPicks--;
+                    getCost();
                     cell.currentlyUnpicked = true;
                 }
 

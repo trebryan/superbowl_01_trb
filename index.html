@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head lang="en">
 
     <meta charset="UTF-8">
@@ -38,26 +38,53 @@
 
 <div ng-app="cellApp" ng-controller="cellController">
 
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="navbar-brand">
+                    <img id="navbarlogo" src="images/OverPlayTVLogo_notext.png" class="img-responsive">
+                </div>
+            </div>
+            <div class="navbar-body">
+                <p class="navbar-text navbar-right">{{realName}} {{initials}}</p>
+            </div>
+        </div>
+    </div>
+
+
+
+
 <div class="container">
 
-        <div class="navbar"></div>
-        <h1 align="center"><img src="images/LowerBank.png" class="img-responsive">Super Bowl Pool</h1>
+    <div class="panel panel-default">
+        <p><img id="lowerbank" src="images/LowerBankLong2.png" class="img-responsive"></p>
+        <h1 id="spyhead" align="center">Super Bowl Pool</h1>
+    </div>
 
 
 <div class="row">
     <div class="col-sm-4">
         <div class="panel panel-default">
-            <div class="panel-heading">Your Information</div>
+            <div class="panel-heading panel-title"><span class="glyphicon glyphicon-usd"></span> Your Bets</div>
                 <div class="panel-body">
-                    <p>Real Name: {{realName}}</p>
-                    <p>Nickname: {{nickName}}</p>
-                    <p>Initials:  {{initials}}</p>
+                    <p>Total Picks: {{totalPicks}}</p>
+                    <p>Paid Picks: {{paidPicks}}</p>
+                    <p>Unpaid Picks:  {{unpaidPicks}}</p>
+                    <p>Amount Due: {{payNow}}</p>
+                    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                        <input type="hidden" name="cmd" value="_cart">
+                        <input type="hidden" name="upload" value="1">
+                        <input type="hidden" name="business" value="trebryan-facilitator@gmail.com">
+                        <input type="hidden" name="item_name_1" value="Super Bowl Picks">
+                        <input type="hidden" name="amount_1" value="{{payNow}}">
+                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif" value="PayPal">
+                    </form>
                 </div>
         </div>
         <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-default">
-                <div class="panel-heading">How To Play</div>
+                <div class="panel-heading panel-title"><span class="glyphicon glyphicon-list-alt"></span> How To Play</div>
                 <div class="panel-body">
                     <div class="list-group">
                         <li>Each box represents the last digits of the current score (i.e. 7-0.)</li>
@@ -85,7 +112,7 @@
     <div class="col-sm-8">
         <div class="row">
             <div class="panel panel-default">
-                <div class="panel-heading">Your Picks Here</div>
+                <div class="panel-heading panel-title"><span class="glyphicon glyphicon-ok-sign"></span> Make Your Picks Here</div>
                 <div class="table-responsive">
                     <table class="table">
                         <th></th>
@@ -110,7 +137,7 @@
     </div>
 </div>
 </div>
-</div>
+
 
 
 </body>

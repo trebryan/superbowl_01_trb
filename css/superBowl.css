@@ -1,4 +1,10 @@
+@font-face {
+    font-family: SpyAgency;
+    src: url(/fonts/spyagency2_1.ttf);
+}
+
 body {
+    padding-top: 70px;
     background-image: url(../images/footbal_field-new.jpg);
 }
 
@@ -6,9 +12,38 @@ td {
     width: 3em;
     height: 3em;
     text-align: center;
-    border: 1px solid black;
+    border: 2px solid green;
+}
+
+th {
+    padding-bottom: 0%;
+}
+
+.jumbotron {
+    background-color: palegoldenrod !important;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    background-color: #b0e0e6;
+}
+
+#spyhead{
+    font-family: SpyAgency;
+    color: #594a41;
+}
+#lowerbank{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#navbarlogo{
+    width: 6%;
 }
 
 #leftlogoheader{
     vertical-align: middle;
+    width: 70%;
 }
