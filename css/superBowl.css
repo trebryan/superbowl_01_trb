@@ -8,14 +8,14 @@ body {
     background-image: url(../images/footbal_field-new.jpg);
 }
 
-td {
+table.picktable td {
     width: 3em;
     height: 3em;
     text-align: center;
     border: 2px solid green;
 }
 
-th {
+table.picktable th {
     padding-bottom: 0%;
 }
 

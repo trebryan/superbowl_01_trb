@@ -7,6 +7,7 @@ app.controller("cellController", function($scope, $http) {
 
     $scope.myModel = {message: ""};
     $scope.realName= "Treb Ryan";
+    $scope.emailAdress="trebryan@gmail.com";
     $scope.nickName="The Man!";
     $scope.initials = "RJR";
     $scope.pickFile = [];
