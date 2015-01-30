@@ -79,18 +79,18 @@ app.controller("cellController", function($scope, $http) {
             line.forEach(function(record){
 
                 var row = record.screenRow;
-                var col = record.screenCol;
+                var col = record.screenColumn;
 
                 //Select the right visual cell from the array of playingField
                 var currentCell = $scope.playingField[row][col];
 
                 //Fill it with the saved data
-                currentCell.initials = record.initials;
+                currentCell.initials = record.initials || "";
                 currentCell.paid = record.paid;
 
                 //Put all the player's cells in a handy array
                 if (currentCell.initials==$scope.player.initials){
-                    $scope.playersCells.push(currentCell);
+                    $scope.player.playersCells.push(currentCell);
                 }
 
             });
