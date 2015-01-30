@@ -72,6 +72,7 @@ app.controller("cellController", function($scope, $http) {
         }
     }
 
+    // Digest the data returned and setup playingField to match
     function processPickFile(){
         $scope.pickFile.forEach(function(line){
 
@@ -139,6 +140,13 @@ app.controller("cellController", function($scope, $http) {
         });
 
         return total;
+
+    }
+
+    $scope.applyChanges = function(){
+        // You would do the billing, etc here. For now, just save the json out
+
+        pushFieldToServer();
 
     }
 
