@@ -1,6 +1,6 @@
 @font-face {
     font-family: SpyAgency;
-    src: url(/fonts/spyagency2_1.ttf);
+    src: url(../fonts/spyagency2_1.ttf);
 }
 
 body {
@@ -46,4 +46,12 @@ table.picktable th {
 #leftlogoheader{
     vertical-align: middle;
     width: 70%;
+}
+
+.logo-wrapper{
+    margin-top: 20px;
+}
+
+#logoside{
+    min-width: 50px;
 }
