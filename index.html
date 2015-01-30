@@ -48,12 +48,12 @@
             <div class="nav navbar-right">
             <ul class="dropdown">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <span class="glyphicon glyphicon-user"> {{realName}} Info</span><span class="caret"></span></a>
+                            <span class="glyphicon glyphicon-user"> {{player.realName}} Info</span><span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">{{realName}}</a></li>
-                            <li><a href="#">{{nickName}}</a></li>
-                            <li><a href="#">{{emailAddress}}</a></li>
-                            <li><a href="#">{{initials}}</a></li>
+                            <li><a href="#">{{player.realName}}</a></li>
+                            <li><a href="#">{{player.nickName}}</a></li>
+                            <li><a href="#">{{player.emailAddress}}</a></li>
+                            <li><a href="#">{{player.initials}}</a></li>
                             <li class="divider"></li>
                             <li><a href="#">Edit Info</a></li>
                         </ul>
@@ -83,13 +83,15 @@
                     <table class="table table-striped">
                         <tr>
                             <td>Total Picks</td>
-                            <td>{{totalPicks}}</td>
+                            <td>{{player.playersCells.length}}</td>
                         </tr>
                         <tr>
                             <td>Amount Owed</td>
-                            <td>${{payNow}}</td>
+                            <td>${{getOwed()}}</td>
                         </tr>
                     </table>
+                    <button class="btn btn-success" ng-click="applyChanges()">Apply Changes</button>
+                    <div style="margin-bottom: 5px">&nbsp;</div>
                     <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
                         <input type="hidden" name="cmd" value="_cart">
                         <input type="hidden" name="upload" value="1">
@@ -144,7 +146,7 @@
 
                         <tr ng-repeat = "row in playingField">
                             <th>tbd</th>
-                            <td ng-repeat = "cell in row" ng-click="selected(cell)" ng-init="load(cell)">
+                            <td ng-repeat = "cell in row" ng-click="cell.picked()" >
                                 <p>{{cell.initials}}</p>
                             </td>
                         </tr>
