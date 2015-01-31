@@ -5,6 +5,8 @@
 
 app.controller("cellController", function($scope, $http) {
 
+    console.log("Loading cellController (cell picker)");
+
     $scope.myModel = {message: ""};
 
     //MAK moved player to an object because of Angular's issues with simple content types like strings

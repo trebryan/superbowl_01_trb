@@ -1,0 +1,106 @@
+.reg-popover{
+
+    position: relative;
+    background-color: rgba(221, 221, 221, 0.80);
+    border: 5px solid white;
+    border-radius: 10px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+/* BUTTONS */
+
+.button-big {
+    width: 450px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 2em;
+    color: white;
+}
+
+.button-create-player {
+    margin-left: 20px;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.button-fm {
+   float: left;
+    margin-right: 6vw;
+}
+
+/* REGISTRATION SCREEN */
+
+
+.leftbold {
+    font-weight: bold;
+    font-size: 2em;
+    margin-left: 20px;
+}
+
+.reg-screen-holder{
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.reg-screen-input-holder{
+    margin-top: 20px;
+    font-size: 2em;
+}
+
+.reg-screen-input-holder input {
+    width: 450px;
+    xxborder: 0px;
+    padding: 10px;
+    margin-left: 20px;
+
+    margin-bottom: 10px;
+
+}
+
+.see-who {
+    text-align: right;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.see-who:hover{
+    font-weight: bold;
+}
+
+.center-big {
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+}
+
+/* COMMON */
+
+.grey {
+    background-color: #419aba;
+}
+
+.grey:hover {
+    background-color: #919294;
+
+}
+
+.cfa-btn {
+    color: #e21736;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 1);
+}
+
+.op50 {
+    opacity: 0.50;
+}
+
+.op30 {
+    opacity: 0.30;
+}
+

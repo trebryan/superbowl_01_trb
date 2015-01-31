@@ -1,11 +1,10 @@
 @font-face {
     font-family: SpyAgency;
-    src: url(../fonts/spyagency2_1.ttf);
+    src: url(../../../fonts/spyagency2_1.ttf);
 }
 
 body {
-    padding-top: 70px;
-    background-image: url(../images/footbal_field-new.jpg);
+    background-image: url(../../../images/footbal_field-new.jpg);
 }
 
 table.picktable td {
@@ -30,7 +29,7 @@ table.picktable th {
     background-color: #b0e0e6;
 }
 
-#spyhead{
+.spyhead{
     font-family: SpyAgency;
     color: #594a41;
 }
@@ -48,10 +47,22 @@ table.picktable th {
     width: 70%;
 }
 
-.logo-wrapper{
-    margin-top: 20px;
-}
+
 
 #logoside{
     min-width: 50px;
+}
+
+/* Mitch additions */
+.inset50{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.topgap20{
+    margin-top: 20px;
+}
+
+.logo-wrapper{
+    margin-top: 20px;
 }
