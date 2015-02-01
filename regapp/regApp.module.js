@@ -4,12 +4,13 @@ var app = angular.module('regApp', ['ngRoute', 'ui.bootstrap', 'ngAnimate', 'ngT
 
 angular
   .module('regApp')
-  .config(['ngToastProvider', function(ngToast) {
+  .config(['ngToastProvider',  function(ngToast) {
     ngToast.configure({
       verticalPosition: 'bottom',
       horizontalPosition: 'center',
       maxNumber: 3
     });
+
   }]);
 
 /*

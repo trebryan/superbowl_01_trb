@@ -12,6 +12,15 @@ app.controller("appController", function($scope, $http, ngToast, $location, $q) 
     $scope.settings = { locked: false, columns: [], rows:[] };
 
 
+    $http.jsonp('http://www.xplorious.com/stubhubcms/rest/node.json').then(
+        function(data){
+            console.log(data);
+        },
+        function(err){
+            console.log(err);
+        }
+    )
+
     function pushSettingsToServer(){
         $http.post('superbowl_save_settings.php', $scope.settings).then(
             function(data){
@@ -180,17 +189,13 @@ app.controller("appController", function($scope, $http, ngToast, $location, $q) 
                     $scope.settings.columns = cols.slice(0);
                     pushSettingsToServer();
 
-                    var r, c;
-
-                    pickFile.forEach(function(line) {
-                        c = cols.pop();
-                        line.forEach(function (record) {
-                            r = rows.pop();
-                            record.scoreRow = r;
-                            record.scoreColumn = c;
-                            console.log(record);
-                        });
-                    });
+                    for (var srow=0; srow<10; srow++){
+                        for (var scol=0; scol<10; scol++){
+                            var cell = pickFile[srow][scol];
+                            cell.scoreRow = rows[srow];
+                            cell.scoreColumn = cols[scol];
+                        }
+                    }
 
                     $http.post('superbowl_save_json.php', pickFile).then(
                         function(data){
