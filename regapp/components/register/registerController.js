@@ -42,7 +42,7 @@ app.controller("regController", function($scope, ngToast, $location) {
             $scope.checkAccountThenAdd($scope.model).then(
                 function(msg){
                     ngToast.create("Account Created");
-                    $scope.currentPlayer = {
+                    $scope.$parent.currentPlayer = {
                         name: $scope.model.name,
                         email: $scope.model.email,
                         initials: $scope.model.initials,

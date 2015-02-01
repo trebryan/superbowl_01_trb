@@ -43,9 +43,11 @@ app.controller("cellController", function($scope, $http, ngToast, $location) {
                 console.log("Cannot change a paid cell");
                 ngToast.create("You cannot change a square you have already bought!");
             } else if (this.initials == ""){
+
                 this.initials = $scope.currentPlayer.initials;
                 $scope.currentPlayer.playersCells.push(this);
                 ngToast.create("Square bought");
+                pushFieldToServer();
 
             } else if ( this.initials == $scope.currentPlayer.initials){
                 this.initials = ""; //unpick, but only if picked by same user
@@ -54,6 +56,8 @@ app.controller("cellController", function($scope, $http, ngToast, $location) {
                     $scope.currentPlayer.playersCells.splice(idx,1);//remove that cell
                 }
                 ngToast.create("Square unpicked!");
+                pushFieldToServer();
+
 
             } else {
                 //TODO "Nice try" message
@@ -103,10 +107,14 @@ app.controller("cellController", function($scope, $http, ngToast, $location) {
 
     }
 
+
     function pushFieldToServer(){
+
         $http.post('superbowl_save_json.php', $scope.playingField).then(
             function(data){
                 console.log("Saved field: "+data);
+                $scope.pickFile = data.data;
+                processPickFile();
             },
             function(err){
                 console.log("Error saving field: "+data);
