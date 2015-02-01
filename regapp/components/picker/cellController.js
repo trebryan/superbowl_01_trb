@@ -3,7 +3,7 @@
  */
 
 
-app.controller("cellController", function($scope, $http) {
+app.controller("cellController", function($scope, $http, ngToast, $location) {
 
     console.log("Loading cellController (cell picker)");
 
@@ -11,15 +11,7 @@ app.controller("cellController", function($scope, $http) {
 
     //MAK moved player to an object because of Angular's issues with simple content types like strings
     //and it's syntactically cleaner.
-    $scope.player = {
-        realName: "Treb Ryan",
-        emailAddress: "trebryan@gmail.com",
-        nickName: "The Man!",
-        initials: "RJR",
-        totalPicks: 0,
-        payNow: 0,
-        playersCells: []
-    }
+
 
     $scope.pickFile = [];
 
@@ -49,19 +41,25 @@ app.controller("cellController", function($scope, $http) {
             if (this.paid){
                 //TODO toast message
                 console.log("Cannot change a paid cell");
+                ngToast.create("You cannot change a square you have already bought!");
             } else if (this.initials == ""){
-                this.initials = $scope.player.initials;
-                $scope.player.playersCells.push(this);
-            } else if ( this.initials == $scope.player.initials){
+                this.initials = $scope.currentPlayer.initials;
+                $scope.currentPlayer.playersCells.push(this);
+                ngToast.create("Square bought");
+
+            } else if ( this.initials == $scope.currentPlayer.initials){
                 this.initials = ""; //unpick, but only if picked by same user
-                var idx = $scope.player.playersCells.indexOf(this);
+                var idx = $scope.currentPlayer.playersCells.indexOf(this);
                 if (idx>-1){
-                    $scope.player.playersCells.splice(idx,1);//remove that cell
+                    $scope.currentPlayer.playersCells.splice(idx,1);//remove that cell
                 }
+                ngToast.create("Square unpicked!");
 
             } else {
                 //TODO "Nice try" message
                 console.log("Bzzzzz. You can't change someone else's shit, homey");
+                ngToast.create("Square already owned!");
+
             }
         }
 
@@ -76,7 +74,11 @@ app.controller("cellController", function($scope, $http) {
 
     // Digest the data returned and setup playingField to match
     function processPickFile(){
+
+        $scope.currentPlayer.playersCells = [];
+
         $scope.pickFile.forEach(function(line){
+
 
             line.forEach(function(record){
 
@@ -91,8 +93,8 @@ app.controller("cellController", function($scope, $http) {
                 currentCell.paid = record.paid;
 
                 //Put all the player's cells in a handy array
-                if (currentCell.initials==$scope.player.initials){
-                    $scope.player.playersCells.push(currentCell);
+                if (currentCell.initials==$scope.currentPlayer.initials){
+                    $scope.currentPlayer.playersCells.push(currentCell);
                 }
 
             });
@@ -134,7 +136,7 @@ app.controller("cellController", function($scope, $http) {
 
         var total=0;
 
-        $scope.player.playersCells.forEach(function(cell){
+        $scope.currentPlayer.playersCells.forEach(function(cell){
 
             if (cell.paid==false){
                 total+=$scope.pickPrice;
@@ -149,7 +151,14 @@ app.controller("cellController", function($scope, $http) {
         // You would do the billing, etc here. For now, just save the json out
 
         pushFieldToServer();
+        ngToast.create("Thanks for playing!");
+        $location.path("/");
 
+    }
+
+    if (!$scope.currentPlayer.name){
+        //hacky way of doing this
+        $location.path("/");
     }
 
 });

@@ -20,6 +20,16 @@ app.config(function($routeProvider) {
             //controller: 'cellController'
         })
 
+        .when('/admin', {
+            templateUrl: 'regapp/components/admin/admin.partial.html'
+            //controller: 'cellController'
+        })
+
+        .when('/leaderboard', {
+            templateUrl: 'regapp/components/leaderboard/lb.partial.html',
+            controller: 'lbController'
+        })
+
         .otherwise({
             redirectTo: '/landing'
         });

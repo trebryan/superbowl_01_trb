@@ -80,6 +80,13 @@
     text-align: center;
 }
 
+.login-fail {
+    font-weight: bold;
+    color: red;
+    font-size: 0.5em;
+    text-align: center;
+}
+
 /* COMMON */
 
 .grey {

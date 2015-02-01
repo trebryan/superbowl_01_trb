@@ -1,0 +1,31 @@
+<div ng-app="cellApp" ng-controller="lbController">
+<div class="container">
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-title"><span class="glyphicon glyphicon-ok-sign"></span></div>
+                <div class="table-responsive">
+                    <table class="table picktable">
+                        <th></th>
+                        <th colspan=11><img src="images/seahawks.png" id="logotop" ALT="seahawks" class="img-responsive center-block">
+                        </th>
+                        <tr>
+                        <th id="leftlogoheader" rowspan=11><img src="images/patriots.png" id="logoside" alt="patriots" class="img-responsive"></th>
+                        <th>Score</th>
+                        <th ng-repeat = "cell in playingField">{{settings.columns[$index]}}</th>
+
+                        <tr ng-repeat = "row in playingField">
+                            <th>{{settings.rows[$index]}}</th>
+                            <td ng-repeat = "cell in row" ng-click="cell.picked()" >
+                                <p>{{cell.initials}}</p>
+                            </td>
+                        </tr>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>

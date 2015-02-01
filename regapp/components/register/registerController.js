@@ -8,99 +8,60 @@
  *
  */
 
-app.controller("regController", function($scope, ngToast, $q, fortune, $timeout, $location) {
+app.controller("regController", function($scope, ngToast, $location) {
 
     console.log("regController be loaded.");
 
-    $scope.model = {firstName: "", lastName:"", email:""};
+    $scope.model = {pwd1:"", pwd2:"", name:"", email:"", initials:""};
 
-    function validate(){
-        if ( !$scope.model.firstName || !$scope.model.lastName ){
-        ngToast.create("Player must fill in first and last name!");
-        return false;
+     function validate(){
+        if ( !$scope.model.name || !$scope.model.initials ){
+             //ngToast.create("Please fill in first and last name!");
+            ngToast.create("Please enter name and initials");
+            return false;
         }
 
+        var validEmail = RegExp("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}").test($scope.model.email);
+        if (!validEmail){
+            ngToast.create("Please enter a valid email");
+            return false;
+        }
 
+        if ($scope.model.pwd1=="" || ($scope.model.pwd1 != $scope.model.pwd2) ){
+            ngToast.create("Password must match");
+            return false;
+        }
 
         return true;
-    }
+     }
 
-    function createGuest(){
+     $scope.createPlayer = function(){
 
-        var d = $q.defer();
+        if(validate()){
 
-        var localEmail = $scope.model.email;
-        if (!localEmail){
-            localEmail = "no-email-given@test.com";
-        }
-
-        fortune.createResources("guests", [ { firstName: $scope.model.firstName,
-            lastName: $scope.model.lastName, email: localEmail, eventId: fortune.settings.eventId } ])
-
-        .then(
-            function(data){
-                ngToast.create("Player Registered");
-                var guest = data.data.guests[0];
-                d.resolve(guest.id);
-            },
-            function(err){
-                ngToast.create("Registration failed!");
-                d.reject();
-
-            });
-
-        return d.promise;
-
-    }
-
-    function queueGuest(guestId){
-
-        var d = $q.defer();
-
-        var payload = [];
-        payload.push({ queueName: "chick-fil-a", guestId: guestId });
-
-
-        fortune.createResources('queues', payload).then(
-            function(data){
-                ngToast.create("Player Queued");
-                $timeout(function(){
-                    $location.path("/");
-                }, 2000);
-                d.resolve();
-            },
-            function(err){
-                ngToast.create("Failed to Queue Player!");
-                console.log(err);
-                d.reject();
-            }
-        )
-
-        return d.promise;
-
-    }
-
-
-    $scope.createPlayer = function(){
-
-
-        if (validate()){
-
-            createGuest().then(
-            function(guestId){
-
-                queueGuest(guestId).then(
-                    function(data){
-                        $timeout(function(){
-                            $location.path("/");
-                         }, 2000);
-
+            $scope.checkAccountThenAdd($scope.model).then(
+                function(msg){
+                    ngToast.create("Account Created");
+                    $scope.currentPlayer = {
+                        name: $scope.model.name,
+                        email: $scope.model.email,
+                        initials: $scope.model.initials,
+                        totalPicks: 0,
+                        payNow: 0,
+                        playersCells: []
                     }
-                );
+                    $location.path("/picks")
 
-            });
+                },
+                function(msg){
+                    ngToast.create(msg);
+                }
 
-        }
-    };
+            );
+
+        };
+
+     }
+
 
 });

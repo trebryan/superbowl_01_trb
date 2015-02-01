@@ -1,15 +1,14 @@
 <div ng-app="cellApp" ng-controller="cellController">
-
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
         <div class="panel panel-default">
-            <div class="panel-heading panel-title"><span class="glyphicon glyphicon-usd"></span> Your Bets</div>
+            <div class="panel-heading panel-title"><span class="glyphicon glyphicon-usd"></span>{{currentPlayer.name}}'s Bets</div>
                 <div class="panel-body">
                     <table class="table table-striped">
                         <tr>
                             <td>Total Picks</td>
-                            <td>{{player.playersCells.length}}</td>
+                            <td>{{currentPlayer.playersCells.length}}</td>
                         </tr>
                         <tr>
                             <td>Amount Owed</td>

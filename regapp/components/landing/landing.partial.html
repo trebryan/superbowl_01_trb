@@ -3,6 +3,7 @@
   <div class="reg-popover">
     <div class="reg-screen-input-holder">
       <div class="reg-screen-name-holder">
+        <p ng-show="model.loginFail" class="login-fail">Failed to log in. Please check your email/password.</p>
         <input type="text" ng-model="currentPlayer.email" placeholder="email"/>
         <input type="password" ng-model="currentPlayer.pwd" placeholder="password"/>
       </div>

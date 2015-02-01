@@ -1,0 +1,11 @@
+<div>
+  <div class="panel inset50">
+    <div>
+      <p>Game is currently: {{settings.locked?"locked":"unlocked"}}</p>
+    </div>
+    <button class="btn btn-primary topgap20" ng-click="toggleLock()">{{settings.locked?"UNLOCK":"LOCK"}} Game</button><br>
+    <button class="btn btn-primary topgap20" ng-click="assignRowsColumns()">Assign Rows and Columns</button><br>
+    <button class="btn btn-primary topgap20" ng-click="leaderboard()">Leaderboard</button><br>
+  </div>
+
+</div>
