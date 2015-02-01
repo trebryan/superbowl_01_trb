@@ -58,7 +58,7 @@ app.controller("appController", function($scope, $http, ngToast, $location, $q) 
             }
 
         } else {
-            $scope.mode.loginFail = true;
+            $scope.model.loginFail = true;
         }
 
         }
