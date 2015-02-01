@@ -55,6 +55,7 @@ app.controller("appController", function($scope, $http, ngToast, $location, $q) 
                 $scope.currentPlayer.name = user.name;
                 $scope.currentPlayer.initials = user.initials;
                 $location.path('/picks');
+                $scope.model.loginFail = false;
             }
 
         } else {
