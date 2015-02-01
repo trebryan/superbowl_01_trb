@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/html" ng-app="regApp">
 <head lang="en">
 
     <meta charset="UTF-8">
@@ -7,154 +7,55 @@
 
     <title>Lower Bank Super Bowl Pool</title>
 
-    <link rel="stylesheet" type="text/css" href="css/superBowl.css">
-
     <link rel="icon"
           type="image/jpg"
           href="images/beer_mug.ico">
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/ngtoast/dist/ngToast.css">
 
-    <link rel="stylesheet" type="text/css" href="css/superBowl.css">
+    <link rel="stylesheet" type="text/css" href="regapp/assets/css/superBowl.css">
+    <link rel="stylesheet" type="text/css" href="regapp/assets/css/login.css">
 
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/ngtoast/dist/ngToast.js"></script>
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- App  Code -->
+    <script src="regapp/regApp.module.js"></script>
+    <script src="regapp/regApp.routes.js"></script>
 
-    <!-- Latest compiled JavaScript -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-    <!-- Latest compile AngularJS -->
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-
-    <!-- Cell Controller Code -->
-    <script src="js/cellApp.js"></script>
-    <script src="js/cellController.js"></script>
+    <script src="regapp/appController.js"></script>
+    <script src="regapp/components/picker/cellController.js"></script>
+    <script src="regapp/components/register/registerController.js"></script>
+    <script src="regapp/components/leaderboard/lbController.js"></script>
+    <script src="regapp/components/navbar/navbar.directive.js"></script>
 
 </head>
 
-<body>
+<body ng-controller="appController">
 
-<div ng-app="cellApp" ng-controller="cellController">
-
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <div class="navbar-brand">
-                    <a href="http://www.overplay.io"><img id="navbarlogo" src="images/OverPlayTVLogo_notext.png" class="img-responsive"></a>
-                </div>
-            </div>
-            <div class="nav navbar-right">
-            <ul class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <span class="glyphicon glyphicon-user"> {{realName}} Info</span><span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">{{realName}}</a></li>
-                            <li><a href="#">{{nickName}}</a></li>
-                            <li><a href="#">{{emailAddress}}</a></li>
-                            <li><a href="#">{{initials}}</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Edit Info</a></li>
-                        </ul>
-                </ul>
-            </div>
-            </div>
-        </div>
-    
-
-
-
-
-<div class="container">
-
-    <div class="panel panel-default">
-        <p><img id="lowerbank" src="images/LowerBankLong2.png" class="img-responsive"></p>
-        <h1 id="spyhead" align="center">Super Bowl Pool</h1>
+	<toast></toast>
+	<!-- Just the logo header -->
+  <div class="panel panel-default inset50 topgap20">
+      <div class="logo-wrapper">
+        <img id="lowerbank" src="images/LowerBankLong2.png" class="img-responsive">
+        <h1 class="spyhead" align="center">Super Bowl Pool</h1>
+      </div>
     </div>
+	<!-- TREB's NAVBAR NOW DISABLED
+	<nav-bar></nav-bar>
+	-->
+	<!-- holds the views for each piece of the app -->
+  <ng-view></ng-view>
+</body>
+</html>
 
-
-<div class="row">
-    <div class="col-sm-4">
-        <div class="panel panel-default">
-            <div class="panel-heading panel-title"><span class="glyphicon glyphicon-usd"></span> Your Bets</div>
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <tr>
-                            <td>Total Picks</td>
-                            <td>{{totalPicks}}</td>
-                        </tr>
-                        <tr>
-                            <td>Amount Owed</td>
-                            <td>${{payNow}}</td>
-                        </tr>
-                    </table>
-                    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-                        <input type="hidden" name="cmd" value="_cart">
-                        <input type="hidden" name="upload" value="1">
-                        <input type="hidden" name="business" value="trebryan-facilitator@gmail.com">
-                        <input type="hidden" name="item_name_1" value="Super Bowl Picks">
-                        <input type="hidden" name="amount_1" value="{{payNow}}">
-                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif" value="PayPal">
-                    </form>
-                </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-12">
-            <div class="panel panel-default">
-                <div class="panel-heading panel-title"><span class="glyphicon glyphicon-list-alt"></span> How To Play</div>
-                <div class="panel-body">
-                    <div class="list-group">
-                        <li>Each box represents the last digits of the current score (i.e. 7-0.)</li>
-                        <li>The scores will be randomly assigned after all boxes are picked so no player knows which boxes will have good scores.</li>
-                        <li>The row scores will represent the Patriots score, the column scores the Seahawks.</li>
-                        <li>Boxes will cost $10 each to pick.  Pick as many as you'd like.  We can make another pool.</li>
-                        <li>The total prize pool will be $1000.</li>
-                        <li>Payouts will be $200 for the end of each quarter and $200 for the end of the game. </li>
-                        <li>Yes that means if the game ends at the end of the fourth quarter the final winner will receive $400.</li>
-                        <li>If it goes into OT it will be split between the 4th quarter and OT.</li>
-                        <li>Payment can be made by now by PayPal or Credit Card now or cash at the day of the event.</li>
-                        <li>If you want to pay by Credit Card, use the Pay Pal button.  You don't need an account.</li>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    </div>
-
-
-
-
-
-    <div class="col-sm-8">
-        <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-heading panel-title"><span class="glyphicon glyphicon-ok-sign"></span> Make Your Picks Here</div>
-                <div class="table-responsive">
-                    <table class="table picktable">
-                        <th></th>
-                        <th colspan=11><IMG SRC="images/seahawks.png" id="logotop" ALT="seahawks" class="img-responsive center-block">
-                        </th>
-                        <tr>
-                        <th id="leftlogoheader" rowspan=11><IMG SRC="images/patriots.png" id="logoside" ALT="patriots" class="img-responsive"></th>
-                        <th>Score</th>
-                        <th ng-repeat = "cell in playingField">TBD</th>
-
-                        <tr ng-repeat = "row in playingField">
-                            <th>tbd</th>
-                            <td ng-repeat = "cell in row" ng-click="selected(cell)" ng-init="load(cell)">
-                                <p>{{cell.initials}}</p>
-                            </td>
-                        </tr>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
 
 
 

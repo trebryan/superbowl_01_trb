@@ -1,0 +1,60 @@
+body {
+    padding: 0px;
+    font-family: "Droid Sans", "Helvetica Neue", "Nimbus Sans L", sans-serif;
+}
+
+
+.header {
+    width: 100%;
+}
+
+.header-div  {
+    width: 50%;
+    text-align: center;
+    font-size: 1em;
+    float: left;
+    background-color: #67b168;
+    padding: 8px;
+    margin-bottom: 10px;
+
+
+}
+
+.header-div a {
+    color: #ffffff;
+}
+
+.score-button {
+    width: 20vw;
+
+}
+
+.panel-holder {
+    width: 100%;
+}
+
+.score-panel {
+    float: left;
+    border: 1px color red;
+    width: 50%;
+}
+
+.score-panel img {
+    display:block;
+    margin:auto;
+    opacity: 0.5;
+}
+
+.score-panel p {
+    text-align: center;
+    font-size: 5em;
+}
+
+.red-score {
+    color: red;
+}
+
+.blue-score {
+    color: blue;
+}
+
